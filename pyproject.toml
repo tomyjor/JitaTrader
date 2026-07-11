@@ -1,0 +1,35 @@
+[project]
+name = "jitatrader-v2"
+version = "0.3.0"
+description = "Decision Intelligence System for EVE Online Jita Trading - v2 with Clean Architecture"
+authors = [{name = "Tomas"}]
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.0",
+    "streamlit>=1.35",
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 100
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+
+[tool.pytest.ini_options]
+# Antes había que correr `PYTHONPATH=src pytest` a mano porque no existía
+# este bloque ni conftest.py -- el pythonpath acá abajo hace que
+# `from domain...`, `from application...`, etc. resuelvan solo, sin setear
+# nada en la shell. Requiere pytest>=7.0 (declarado en dev deps arriba).
+pythonpath = ["src"]
+testpaths = ["tests"]
